@@ -1,0 +1,7 @@
+# Repo-wide ownership.
+# Solo project, so every PR routes a code-owner request to @Demosz.
+# Branch protection requires code-owner review, and admin bypass is
+# explicitly allowed because @Demosz is the only developer; bypasses appear
+# in the GitHub audit log and on the PR.
+
+* @Demosz
