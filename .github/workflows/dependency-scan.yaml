@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Scan #1: visibility — all severities, never blocks, emits SARIF for Code Scanning.
       - name: Trivy filesystem scan (visibility — all severities, non-blocking)
