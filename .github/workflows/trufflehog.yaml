@@ -1,0 +1,40 @@
+name: trufflehog
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  trufflehog:
+    name: trufflehog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog (PR diff scan)
+        if: github.event_name == 'pull_request'
+        uses: trufflesecurity/trufflehog@main
+        with:
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
+          extra_args: --only-verified --fail --output-format=sarif --output=trufflehog.sarif
+
+      - name: TruffleHog (push to main — full history)
+        if: github.event_name == 'push'
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified --fail --output-format=sarif --output=trufflehog.sarif
+
+      - name: Upload SARIF to Code Scanning
+        if: always() && hashFiles('trufflehog.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trufflehog.sarif
