@@ -19,7 +19,7 @@ jobs:
 
       # Scan #1: visibility — all severities, never blocks, emits SARIF for Code Scanning.
       - name: Trivy filesystem scan (visibility — all severities, non-blocking)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs' # dependencies in lockfiles, IaC misconfigurations (terraform)
           scan-ref: '.'
@@ -30,7 +30,7 @@ jobs:
       # Scan #2: gate — HIGH/CRITICAL only, fails the workflow on findings. Reuses the cached DB
       # from scan #1; skip-setup-trivy avoids re-installing the binary.
       - name: Trivy filesystem scan (gate — HIGH/CRITICAL, blocking)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
