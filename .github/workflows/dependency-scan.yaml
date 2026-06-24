@@ -1,0 +1,46 @@
+name: dependency-scan
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  dependency-scan:
+    name: dependency-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Scan #1: visibility — all severities, never blocks, emits SARIF for Code Scanning.
+      - name: Trivy filesystem scan (visibility — all severities, non-blocking)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs' # dependencies in lockfiles, IaC misconfigurations (terraform)
+          scan-ref: '.'
+          exit-code: '0'
+          format: 'sarif'
+          output: 'trivy.sarif'
+
+      # Scan #2: gate — HIGH/CRITICAL only, fails the workflow on findings. Reuses the cached DB
+      # from scan #1; skip-setup-trivy avoids re-installing the binary.
+      - name: Trivy filesystem scan (gate — HIGH/CRITICAL, blocking)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+          format: 'table'
+          skip-setup-trivy: true
+
+      - name: Upload SARIF to Code Scanning
+        if: always() && hashFiles('trivy.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy.sarif
