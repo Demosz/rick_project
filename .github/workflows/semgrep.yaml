@@ -25,7 +25,6 @@ jobs:
           uvx semgrep scan \
             --config auto \
             --error \
-            --metrics off \
             --sarif --output=semgrep.sarif.json
 
       - name: Upload SARIF to Code Scanning
