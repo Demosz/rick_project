@@ -13,3 +13,4 @@ Two web services deployed on AWS EKS with image signing, automated security scan
 ## Repo conventions
 
 - **Solo development with documented admin bypass.** `CODEOWNERS` lists me as the sole owner. Branch protection on `main` requires code-owner review, but admin bypass is explicitly enabled because I'm the only developer. Every bypass is logged in GitHub's audit log and surfaced on the PR as a "Merged without required review" event. In a real team the file would list at least two owners and bypass would be disabled.
+- **Squash-merge only, linear history.** The branch protection ruleset on `main` permits squash as the only merge method and rejects non-fast-forward pushes, so `main` is a strict linear sequence of squash commits.
