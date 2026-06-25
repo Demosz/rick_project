@@ -12,7 +12,7 @@ reviews:
   path_filters:
     - "!docs/**"
     - "!**/*.md"
-    - "!.github/.coderabbit.yaml"
+    - "!coderabbit.yaml"
 
   auto_review:
     enabled: true
