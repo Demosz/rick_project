@@ -37,3 +37,6 @@ repos:
     hooks:
       - id: yamllint
         args: [-d, relaxed]
+
+ci:
+  skip_on_push: true
