@@ -14,3 +14,12 @@ updates:
     groups:
       python-runtime:
         patterns: ["*"]
+
+  - package-ecosystem: "pip"
+    directory: "/rules-service"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      python-runtime:
+        patterns: ["*"]
