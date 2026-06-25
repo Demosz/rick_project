@@ -2,13 +2,8 @@ import random
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from rules_service.models import Rule
 from rules_service.parser import parse
-
-
-class Rule(BaseModel):
-    id: str
-    text: str
 
 
 _RULES_PATH = Path(__file__).parent.parent.parent / "data" / "MagicCompRules.txt"

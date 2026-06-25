@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-from rules_service.main import Rule
+from rules_service.models import Rule
 
 _RULE_PATTERN = re.compile(r"^(\d+\.\d+[a-z]?)\.?\s+(.+)$", re.MULTILINE)
 
