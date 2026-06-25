@@ -12,9 +12,6 @@ dependencies = [
     "uvicorn[standard]>=0.49.0",
 ]
 
-[project.scripts]
-rules-service = "rules_service.main:serve"
-
 [build-system]
 requires = ["uv_build>=0.11.24,<0.12.0"]
 build-backend = "uv_build"
