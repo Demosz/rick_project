@@ -25,6 +25,9 @@ repos:
     rev: v2.14.0
     hooks:
       - id: hadolint
+        stages: [pre-commit]  # only runs locally, not in CI
+        ci:
+          skip: true
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.108.0
