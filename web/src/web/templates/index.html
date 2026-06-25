@@ -7,11 +7,17 @@
     body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; }
     .rule-id { color: #888; font-size: 0.9em; }
     .rule-text { font-size: 1.1em; line-height: 1.5; margin-top: 0.5rem; }
+    .error { color: #b00; }
   </style>
 </head>
 <body>
-  <h1>A random rule</h1>
-  <p class="rule-id">{{ rule.id }}</p>
-  <p class="rule-text">{{ rule.text }}</p>
+  {% if rule %}
+    <h1>A random rule</h1>
+    <p class="rule-id">{{ rule.id }}</p>
+    <p class="rule-text">{{ rule.text }}</p>
+  {% else %}
+    <h1>Service unavailable</h1>
+    <p class="error">The rules service didn't respond in time. Please try again in a moment.</p>
+  {% endif %}
 </body>
 </html>

@@ -5,15 +5,12 @@ description = "Flask app for MTG rules"
 authors = [
     { name = "Demosz", email = "chris@cdcampbell.io" }
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "flask>=3.1.3",
     "gunicorn>=26.0.0",
     "requests>=2.34.2",
 ]
-
-[project.scripts]
-web = "web:main"
 
 [build-system]
 requires = ["uv_build>=0.11.24,<0.12.0"]

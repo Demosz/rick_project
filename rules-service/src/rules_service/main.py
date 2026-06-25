@@ -25,3 +25,8 @@ def get_rule_by_id(rule_id: str) -> Rule:
     if rule is None:
         raise HTTPException(status_code=404, detail="Rule not found")
     return rule
+
+
+@app.get("/healthz")
+def healthz() -> dict[str, str]:
+    return {"status": "ok"}
