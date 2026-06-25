@@ -1,0 +1,19 @@
+services:
+  rules-service:
+    build:
+      context: ./rules-service
+    image: rules-service:dev
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: ./web
+    image: web:dev
+    ports:
+      - "5050:8080"
+    environment:
+      RULES_SERVICE_URL: "http://rules-service:8000"
+    depends_on:
+      rules-service:
+        condition: service_healthy
