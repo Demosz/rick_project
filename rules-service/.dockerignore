@@ -1,0 +1,13 @@
+# Allowlist-style .dockerignore: deny everything by default
+
+*
+
+!pyproject.toml
+!uv.lock
+!src/
+!data/
+
+# Don't ship anything inside src/ that isn't actual package source.
+src/**/__pycache__/
+src/**/*.pyc
+src/**/*.pyo
