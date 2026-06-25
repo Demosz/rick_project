@@ -1,28 +1,27 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+import random
+from pathlib import Path
+
+from fastapi import FastAPI, HTTPException
+from rules_service.models import Rule
+from rules_service.parser import parse
+
+
+_RULES_PATH = Path(__file__).parent.parent.parent / "data" / "MagicCompRules.txt"
+_RULES_LIST: list[Rule] = parse(_RULES_PATH)
+_RULES_BY_ID: dict[str, Rule] = {r.id: r for r in _RULES_LIST}
+
 
 app = FastAPI(title="rules-service", description="MTG rules backend")
 
 
-class Rule(BaseModel):
-    id: str
-    text: str
-
-
-PLACEHOLDER_RULE = Rule(
-    id="100.1a",
-    text=(
-        "These Magic rules apply to any game with two or more players, "
-        "including two-player games and multiplayer games."
-    ),
-)
-
-
 @app.get("/rule/random", response_model=Rule)
 def get_random_rule() -> Rule:
-    return PLACEHOLDER_RULE
+    return random.choice(_RULES_LIST)
 
 
 @app.get("/rule/{rule_id}", response_model=Rule)
 def get_rule_by_id(rule_id: str) -> Rule:
-    return PLACEHOLDER_RULE
+    rule = _RULES_BY_ID.get(rule_id)
+    if rule is None:
+        raise HTTPException(status_code=404, detail="Rule not found")
+    return rule
