@@ -1,0 +1,20 @@
+[project]
+name = "rules-service"
+version = "0.1.0"
+description = "Rules serving back-end as an over-engineered microservice :)"
+authors = [
+    { name = "Demosz", email = "chris@cdcampbell.io" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.138.0",
+    "pydantic>=2.13.4",
+    "uvicorn[standard]>=0.49.0",
+]
+
+[project.scripts]
+rules-service = "rules_service.main:serve"
+
+[build-system]
+requires = ["uv_build>=0.11.24,<0.12.0"]
+build-backend = "uv_build"
