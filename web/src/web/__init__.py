@@ -1,2 +1,4 @@
+from web.app import app
+
 def main() -> None:
-    print("Hello from web!")
+    app.run()
