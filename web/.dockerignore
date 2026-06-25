@@ -1,0 +1,13 @@
+# Allowlist-style .dockerignore: deny everything by default, then explicitly
+# allow only what the Dockerfile COPYs.
+
+*
+
+!pyproject.toml
+!uv.lock
+!src/
+
+# Don't ship anything inside src/ that isn't actual package source.
+src/**/__pycache__/
+src/**/*.pyc
+src/**/*.pyo
