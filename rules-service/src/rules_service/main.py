@@ -1,12 +1,15 @@
 import random
 from pathlib import Path
-
+import os
 from fastapi import FastAPI, HTTPException
 from rules_service.models import Rule
 from rules_service.parser import parse
 
 
-_RULES_PATH = Path(__file__).parent.parent.parent / "data" / "MagicCompRules.txt"
+_DEFAULT_RULES_PATH = (
+    Path(__file__).parent.parent.parent / "data" / "MagicCompRules.txt"
+)
+_RULES_PATH = Path(os.environ.get("RULES_DATA_PATH", str(_DEFAULT_RULES_PATH)))
 _RULES_LIST: list[Rule] = parse(_RULES_PATH)
 _RULES_BY_ID: dict[str, Rule] = {r.id: r for r in _RULES_LIST}
 

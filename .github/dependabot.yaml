@@ -32,3 +32,12 @@ updates:
     groups:
       docker-runtime:
         patterns: ["*"]
+
+  - package-ecosystem: "docker"
+    directory: "/rules-service"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      docker-runtime:
+        patterns: ["*"]
