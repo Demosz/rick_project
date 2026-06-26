@@ -31,6 +31,10 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+terraform/**/.terraform/
+terraform/**/*.tfstate
+terraform/**/*.tfstate.backup
+terraform/**/*.tfplan
 # Note: .terraform.lock.hcl SHOULD be committed (locks provider versions).
 
 # --- macOS ---
