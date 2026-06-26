@@ -1,0 +1,41 @@
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pre-commit:
+    name: pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # terraform_fmt hook (antonbabenko/pre-commit-terraform) shells out to
+      # `terraform fmt`; ubuntu-latest doesn't ship a terraform binary, so the
+      # hook fails with "Neither Terraform nor OpenTofu binary could be found"
+      # without this step. pre-commit.ci's runners had it pre-installed.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+          terraform_wrapper: false # raw binary; the wrapper can confuse fmt's stdout
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        env:
+          # hadolint-docker spins up a Docker container per run; skipped in CI
+          # to keep runtime predictable. Local hook still runs on every commit
+          # so Dockerfile changes don't sneak past — matches the prior
+          # `ci.skip: [hadolint-docker]` block from the pre-commit.ci era.
+          SKIP: hadolint-docker
