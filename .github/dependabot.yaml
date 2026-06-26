@@ -41,3 +41,21 @@ updates:
     groups:
       docker-runtime:
         patterns: ["*"]
+
+  - package-ecosystem: "terraform"
+    directory: "/terraform/bootstrap"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      terraform-providers:
+        patterns: ["*"]
+
+  - package-ecosystem: "terraform"
+    directory: "/terraform/ecr"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      terraform-providers:
+        patterns: ["*"]
