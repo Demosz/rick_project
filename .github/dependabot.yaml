@@ -59,3 +59,12 @@ updates:
     groups:
       terraform-providers:
         patterns: ["*"]
+
+  - package-ecosystem: "terraform"
+    directory: "/terraform/eks"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      terraform-providers:
+        patterns: ["*"]
