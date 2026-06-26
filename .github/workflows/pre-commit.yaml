@@ -26,7 +26,7 @@ jobs:
       # hook fails with "Neither Terraform nor OpenTofu binary could be found"
       # without this step. pre-commit.ci's runners had it pre-installed.
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v4
         with:
           terraform_version: latest
           terraform_wrapper: false # raw binary; the wrapper can confuse fmt's stdout
