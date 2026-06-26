@@ -196,6 +196,19 @@ module "eks" {
         ECRReadOnly   = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
         ALBController = aws_iam_policy.alb_controller.arn
       }
+
+      # IMDSv2 enforcement (http_tokens=required) prevents SSRF-style
+      # credential theft. hop_limit=2 is required so pod-network workloads
+      # can reach IMDS on the host — at hop_limit=1 the response TTL hits
+      # zero crossing back through the pod veth and IMDS calls time out.
+      # Caught 2026-06-26 when ALB controller failed with "no EC2 IMDS
+      # role found, context deadline exceeded".
+      metadata_options = {
+        http_endpoint               = "enabled"
+        http_tokens                 = "required"
+        http_put_response_hop_limit = 2
+        instance_metadata_tags      = "disabled"
+      }
     }
   }
 }
