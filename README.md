@@ -1,6 +1,6 @@
 # rick-project - MTG rules on EKS
 
-Two web services deployed on AWS EKS with image signing, automated security scanning, and a service mesh. The web frontend in Flask, and the backend is FastAPI.
+Two web services deployed on AWS EKS with image signing, automated security scanning, and a service mesh. The web frontend in Flask, and the backend is FastAPI. No real reason for doing this other than I wanted to see how they felt. Turns out, not much different.
 
 ## Architecture
 
@@ -8,7 +8,8 @@ Two web services deployed on AWS EKS with image signing, automated security scan
 - **`rules-service/`** — FastAPI + uvicorn backend. Owns the MTG comprehensive rules data, exposes `GET /rule/random`.
 - **`k8s/`** — Raw Kubernetes manifests (no Kustomize/Helm at this scale).
 - **`terraform/`** — VPC, EKS cluster, ECR, S3 (later), and supporting IAM.
-- **`.github/`** — CODEOWNERS, workflows (Semgrep, TruffleHog, Trivy, pre-commit), Dependabot config.
+- **`.github/`** — workflows (Semgrep, TruffleHog, Trivy, pre-commit).
+- **`root`** - CODEOWNERS and Dependabot config.
 
 ## Repo conventions
 
