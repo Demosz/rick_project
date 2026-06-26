@@ -21,6 +21,13 @@ spec:
           env:
             - name: RULES_SERVICE_URL
               value: "http://rules-service:8000"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 10001
+            capabilities:
+              drop:
+                - ALL
           resources:
             requests:
               cpu: 100m
