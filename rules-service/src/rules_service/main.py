@@ -15,6 +15,7 @@ _RULES_BY_ID: dict[str, Rule] = {r.id: r for r in _RULES_LIST}
 
 
 app = FastAPI(title="rules-service", description="MTG rules backend")
+# hello-world
 
 
 @app.get("/rule/random", response_model=Rule)
