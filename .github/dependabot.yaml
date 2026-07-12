@@ -5,12 +5,16 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "pip"
     directory: "/web"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       python-runtime:
         patterns: ["*"]
@@ -20,6 +24,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       python-runtime:
         patterns: ["*"]
@@ -29,6 +35,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       docker-runtime:
         patterns: ["*"]
@@ -38,6 +46,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       docker-runtime:
         patterns: ["*"]
@@ -47,6 +57,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       terraform-providers:
         patterns: ["*"]
@@ -56,6 +68,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       terraform-providers:
         patterns: ["*"]
@@ -65,6 +79,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
     groups:
       terraform-providers:
         patterns: ["*"]
