@@ -28,6 +28,16 @@ jobs:
             --error \
             --sarif --output=semgrep.sarif.json
 
+      - name: Normalize security-severity for Code Scanning
+        run: |
+          jq '(.runs[].tool.driver.rules[]?.properties["security-severity"]) |=
+              (if . == "High" then "8.0"
+               elif . == "Medium" then "5.0"
+               elif . == "Low" then "3.0"
+               else . end)' \
+            semgrep.sarif.json > semgrep.fixed.sarif.json
+          mv semgrep.fixed.sarif.json semgrep.sarif.json
+
       - name: Upload SARIF to Code Scanning
         if: always()
         uses: github/codeql-action/upload-sarif@99df26d4f13ea111d4ec1a7dddef6063f76b97e9 # v4
