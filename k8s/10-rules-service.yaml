@@ -52,4 +52,4 @@ spec:
     - name: http
       port: 8000
       targetPort: 8000
-# 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 # gitleaks:allow
+# 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 # gitleaks:allow
