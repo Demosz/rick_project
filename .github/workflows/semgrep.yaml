@@ -24,6 +24,7 @@ jobs:
         run: |
           uvx semgrep scan \
             --config auto \
+            --config p/bandit \
             --error \
             --sarif --output=semgrep.sarif.json
 
