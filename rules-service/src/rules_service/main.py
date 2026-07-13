@@ -1,4 +1,4 @@
-import random
+import secrets
 from pathlib import Path
 import os
 from fastapi import FastAPI, HTTPException
@@ -19,7 +19,7 @@ app = FastAPI(title="rules-service", description="MTG rules backend")
 
 @app.get("/rule/random", response_model=Rule)
 def get_random_rule() -> Rule:
-    return random.choice(_RULES_LIST)
+    return secrets.choice(_RULES_LIST)
 
 
 @app.get("/rule/{rule_id}", response_model=Rule)

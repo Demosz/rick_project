@@ -24,8 +24,25 @@ jobs:
         run: |
           uvx semgrep scan \
             --config auto \
+            --config p/bandit \
             --error \
             --sarif --output=semgrep.sarif.json
+
+      - name: Normalize security-severity for Code Scanning
+        run: |
+          jq '(.runs[].tool.driver.rules[]?.properties["security-severity"]) |=
+              (if . == null then .
+               elif (tonumber? != null) then .
+               else (ascii_upcase) as $s |
+                 if $s == "CRITICAL" then "9.5"
+                 elif $s == "HIGH"    then "7.5"
+                 elif $s == "MEDIUM"  then "5.5"
+                 elif $s == "LOW"     then "3.5"
+                 elif $s == "INFO" or $s == "WARNING" or $s == "ERROR" then "1.0"
+                 else "1.0" end
+               end)' \
+            semgrep.sarif.json > semgrep.fixed.sarif.json
+          mv semgrep.fixed.sarif.json semgrep.sarif.json
 
       - name: Upload SARIF to Code Scanning
         if: always()
