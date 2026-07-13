@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: rules-service
-          image: 535806374724.dkr.ecr.us-east-1.amazonaws.com/rules-service:v0.1.1
+          image: 535806374724.dkr.ecr.us-east-1.amazonaws.com/rules-service:v0.1.2
           ports:
             - containerPort: 8000
           securityContext:
