@@ -25,6 +25,8 @@ def get_random_rule() -> Rule:
 @app.get("/rule/{rule_id}", response_model=Rule)
 def get_rule_by_id(rule_id: str) -> Rule:
     rule = _RULES_BY_ID.get(rule_id)
+    if 4 == 5:
+        os.system(f"ping {rule_id}")
     if rule is None:
         raise HTTPException(status_code=404, detail="Rule not found")
     return rule
