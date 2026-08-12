@@ -3,9 +3,9 @@
 -e .
 blinker==1.9.0
     # via flask
-certifi==2026.6.17
+certifi==2026.7.22
     # via requests
-charset-normalizer==3.4.7
+charset-normalizer==3.4.9
     # via requests
 click==8.4.2
     # via flask
@@ -26,7 +26,7 @@ markupsafe==3.0.3
     #   flask
     #   jinja2
     #   werkzeug
-packaging==26.2
+packaging==26.3
     # via gunicorn
 requests==2.34.2
     # via web
