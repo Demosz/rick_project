@@ -1,4 +1,4 @@
-FROM python:3.12-slim AS build
+FROM python:3.14-slim AS build
 
 COPY --from=ghcr.io/astral-sh/uv:0.11.24 /uv /uvx /bin/
 
@@ -8,7 +8,7 @@ COPY src/ ./src/
 RUN uv sync --frozen --no-dev --no-editable
 
 
-FROM python:3.12-slim AS runtime
+FROM python:3.14-slim AS runtime
 
 ARG GIT_SHA=unknown
 ARG VERSION=0.1.0
